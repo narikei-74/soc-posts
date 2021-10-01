@@ -43,7 +43,7 @@ class FishingController extends Controller
 
         $search = $request->search;
 
-        $posts = CampPost::where('title', 'like', '%'.$search.'%', 'or', 'text', 'like', '%'.$search.'%')->get();
+        $posts = FishingPost::where('title', 'like', '%'.$search.'%')->orWhere('text', 'like', '%'.$search.'%')->get();
 
         return view('fishing')->with(['posts' => $posts, 'search' => $search]);
     }

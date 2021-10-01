@@ -35,7 +35,6 @@ class CampController extends Controller
     }
 
     public function search(Request $request) {
-        // $search = $request->input('search');
         $request->validate([
             'search' => 'required',
         ], [
@@ -44,7 +43,7 @@ class CampController extends Controller
 
         $search = $request->search;
 
-        $posts = CampPost::where('title', 'like', '%'.$search.'%', 'or', 'text', 'like', '%'.$search.'%')->get();
+        $posts = CampPost::where('title', 'like', '%'.$search.'%',)->orWhere('text', 'like', '%'.$search.'%')->get();
 
         return view('camp')->with(['posts' => $posts, 'search' => $search]);
     }
